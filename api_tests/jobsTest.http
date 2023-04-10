@@ -1,0 +1,23 @@
+@hostname=http://localhost:5000/api/v1
+
+//create job
+POST {{hostname}}/jobs
+
+###
+
+//get all jobs
+GET {{hostname}}/jobs
+
+###
+
+//show stats
+GET {{hostname}}/jobs/stats
+
+
+###
+
+PATCH {{hostname}}/jobs/123
+
+
+###
+DELETE {{hostname}}/jobs/123

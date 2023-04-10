@@ -1,0 +1,28 @@
+@hostname=http://localhost:5000/api/v1
+
+POST {{hostname}}/auth/register
+content-type: application/json
+
+{
+    "name": "Test Name",
+    "password": "secret",
+    "email": "test+1@gmail.com"
+}
+
+### 
+
+POST {{hostname}}/auth/login
+content-type: application/json
+
+{
+    "email": "test+1@gmail.com",
+    "password": "secret"
+}
+
+###
+
+PATCH {{hostname}}/auth/updateUser
+
+###
+
+GET http://localhost:5000/
