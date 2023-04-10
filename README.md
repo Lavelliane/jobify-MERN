@@ -9,13 +9,12 @@ Technologies Used
 - React
 - Vite
 
-Getting Started
-To get started with this project, run the following commands:
+## Getting Started
+To get started with this project after cloning, run the following commands:
 
 ```
 npm install
 npm run start
-
 ```
 
 You need to add your own .env file for the port, mongo url, and JWT
