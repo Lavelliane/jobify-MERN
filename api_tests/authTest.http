@@ -1,5 +1,5 @@
 @hostname=http://localhost:5000/api/v1
-
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDI0NWUwNjNkMzhjNjlmNGY5NTNkZWUiLCJpYXQiOjE2ODE0ODEwMDQsImV4cCI6MTY4MTU2NzQwNH0.QvbPqDHDjbjk3Jw9g7Yi8skYt4-756zuZpDj4S4O9HQ
 POST {{hostname}}/auth/register
 content-type: application/json
 
