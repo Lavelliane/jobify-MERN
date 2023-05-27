@@ -16,11 +16,12 @@ import {
   CLEAR_VALUES,
   CREATE_JOB_BEGIN,
   CREATE_JOB_SUCCESS,
-  CREATE_JOB_ERROR
+  CREATE_JOB_ERROR,
+  GET_JOBS_SUCCESS,
+  GET_JOBS_BEGIN,
 } from "./actions";
 
 import { initialState } from "./appContext";
-
 
 const reducer = (state, action) => {
   if (action.type === DISPLAY_ALERT) {
@@ -51,18 +52,18 @@ const reducer = (state, action) => {
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
       showAlert: true,
-      alertType: 'success',
-      alertText: 'User Created! Redirecting...'
+      alertType: "success",
+      alertText: "User Created! Redirecting...",
     };
   }
-  if (action.type === REGISTER_USER_ERROR){
+  if (action.type === REGISTER_USER_ERROR) {
     return {
       ...state,
       isLoading: false,
       showAlert: true,
-      alertType: 'danger',
+      alertType: "danger",
       alertText: action.payload.msg,
-    }
+    };
   }
   if (action.type === LOGIN_USER_BEGIN) {
     return { ...state, isLoading: true };
@@ -76,33 +77,33 @@ const reducer = (state, action) => {
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
       showAlert: true,
-      alertType: 'success',
-      alertText: 'Login Successful! Redirecting...'
+      alertType: "success",
+      alertText: "Login Successful! Redirecting...",
     };
   }
-  if (action.type === LOGIN_USER_ERROR){
+  if (action.type === LOGIN_USER_ERROR) {
     return {
       ...state,
       isLoading: false,
       showAlert: true,
-      alertType: 'danger',
+      alertType: "danger",
       alertText: action.payload.msg,
-    }
+    };
   }
-  if (action.type === TOGGLE_SIDEBAR){
+  if (action.type === TOGGLE_SIDEBAR) {
     return {
       ...state,
-      showSidebar: !state.showSidebar
-    }
+      showSidebar: !state.showSidebar,
+    };
   }
-  if(action.type === LOGOUT_USER){
+  if (action.type === LOGOUT_USER) {
     return {
       ...initialState,
       user: null,
-      jobLocation: '',
+      jobLocation: "",
       token: null,
-      userLocation: ''
-    }
+      userLocation: "",
+    };
   }
   if (action.type === UPDATE_USER_BEGIN) {
     return { ...state, isLoading: true };
@@ -116,64 +117,75 @@ const reducer = (state, action) => {
       userLocation: action.payload.location,
       jobLocation: action.payload.location,
       showAlert: true,
-      alertType: 'success',
-      alertText: 'User Profile Updated!'
+      alertType: "success",
+      alertText: "User Profile Updated!",
     };
   }
-  if (action.type === UPDATE_USER_ERROR){
+  if (action.type === UPDATE_USER_ERROR) {
     return {
       ...state,
       isLoading: false,
       showAlert: true,
-      alertType: 'danger',
+      alertType: "danger",
       alertText: action.payload.msg,
-    }
+    };
   }
-  if (action.type === HANDLE_CHANGE){
+  if (action.type === HANDLE_CHANGE) {
     return {
       ...state,
       [action.payload.name]: action.payload.value,
-    }
+    };
   }
-  if (action.type === CLEAR_VALUES){
+  if (action.type === CLEAR_VALUES) {
     const initialState = {
       isEditing: false,
-      editJobId: '',
-      position: '',
-      company: '',
-      jobType: 'full-time',
+      editJobId: "",
+      position: "",
+      company: "",
+      jobType: "full-time",
       jobLocation: state.userLocation || "",
-      status: 'pending',
+      status: "pending",
     };
     return {
       ...state,
       ...initialState,
-    }
+    };
   }
-  if(action.type === CREATE_JOB_BEGIN){
+  if (action.type === CREATE_JOB_BEGIN) {
     return {
       ...state,
       isLoading: true,
-
-    }
+    };
   }
-  if (action.type === CREATE_JOB_SUCCESS){
+  if (action.type === CREATE_JOB_SUCCESS) {
     return {
       ...state,
       isLoading: false,
       showAlert: true,
-      alertType: 'success',
-      alertText: 'New Job Created Successfully',
-    }
+      alertType: "success",
+      alertText: "New Job Created Successfully",
+    };
   }
-  if (action.type === CREATE_JOB_ERROR){
+  if (action.type === CREATE_JOB_ERROR) {
     return {
       ...state,
       isLoading: false,
       showAlert: true,
-      alertType: 'danger',
+      alertType: "danger",
       alertText: action.payload.msg,
-    }
+    };
+  }
+  if (action.type === GET_JOBS_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+  if (action.type === GET_JOBS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      jobs: action.payload.jobs,
+      totalJobs: action.payload.totalJobs,
+      numOfPages: action.payload.numOfPages,
+    };
   }
   throw new Error(`no such action: ${action.type}`);
 };
