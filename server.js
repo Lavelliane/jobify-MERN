@@ -8,6 +8,9 @@ import authRouter from './routes/authRoutes.js'
 import jobsRouter from './routes/jobsRoutes.js'
 import morgan from 'morgan'
 import authenticateUser from './middleware/auth.js'
+import helmet from 'helmet'
+import xss from 'xss-clean'
+import mongoSanitize from 'express-mongo-sanitize'
 
 dotenv.config()
 const app = express()
@@ -21,6 +24,11 @@ if(process.env.NODE_ENV !== 'production'){
     app.use(morgan('dev'))
 }
 app.use(express.json())
+app.use(helmet())
+app.use(xss())
+app.use(mongoSanitize())
+
+
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/jobs', authenticateUser, jobsRouter)
 
